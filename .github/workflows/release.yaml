@@ -9,15 +9,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: ^1.22
+          go-version: 'stable'
       - name: Build geosite
         id: build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           go run -v .
       - name: Release rule sets
@@ -35,7 +37,7 @@ jobs:
         run: .github/release-branch.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - uses: dev-drprasad/delete-older-releases@v0.3.2
+      - uses: dev-drprasad/delete-older-releases@v0.3.3
         if: steps.build.outputs.skip != 'true'
         with:
           keep_latest: 10
@@ -43,7 +45,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Release geosite
         if: steps.build.outputs.skip != 'true'
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.build.outputs.tag }}
           files: |
@@ -51,3 +53,10 @@ jobs:
             geosite.db.sha256sum
             geosite-cn.db
             geosite-cn.db.sha256sum
+      - name: Cleanup Workflow Runs
+        uses: Mattraks/delete-workflow-runs@v2
+        with:
+          token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          retain_days: 7
+          keep_minimum_runs: 1

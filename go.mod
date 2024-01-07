@@ -5,10 +5,11 @@ go 1.21
 toolchain go1.22.3
 
 require (
-	github.com/google/go-github/v45 v45.2.0
+	github.com/google/go-github/v49 v49.1.0
 	github.com/sagernet/sing v0.5.0-beta.1
 	github.com/sagernet/sing-box v1.9.5-0.20240912063220-bed673aa630c
 	github.com/v2fly/v2ray-core/v5 v5.18.0
+	golang.org/x/oauth2 v0.0.0-20180821212333-d2e6202438be
 	google.golang.org/protobuf v1.34.2
 )
 
@@ -26,4 +27,5 @@ require (
 	golang.org/x/sync v0.8.0 // indirect
 	golang.org/x/sys v0.25.0 // indirect
 	golang.org/x/tools v0.23.0 // indirect
+	google.golang.org/appengine v1.6.7 // indirect
 )
