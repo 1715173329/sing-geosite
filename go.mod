@@ -3,10 +3,11 @@ module github.com/sagernet/sing-geosite
 go 1.18
 
 require (
-	github.com/google/go-github/v45 v45.2.0
+	github.com/google/go-github/v49 v49.1.0
 	github.com/sagernet/sing v0.3.0
 	github.com/sagernet/sing-box v1.8.4
 	github.com/v2fly/v2ray-core/v5 v5.13.0
+	golang.org/x/oauth2 v0.0.0-20180821212333-d2e6202438be
 	google.golang.org/protobuf v1.32.0
 )
 
@@ -23,4 +24,5 @@ require (
 	golang.org/x/net v0.20.0 // indirect
 	golang.org/x/sys v0.16.0 // indirect
 	golang.org/x/tools v0.17.0 // indirect
+	google.golang.org/appengine v1.6.7 // indirect
 )
